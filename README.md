@@ -1,160 +1,160 @@
-Voice Notes
-A Flutter-based mobile application named "Voice Notes" that enables users to manage tasks using voice commands, powered by the Gemini API for natural language processing and ObjectBox for local data persistence.
-Features
+# 🎤 Voice Notes
 
-Voice Command Support: Create, update, or delete tasks using voice input processed by the Gemini API.
-Task Management: Add, view, update, and delete tasks with title, description, and datetime.
-Local Storage: Persists tasks using ObjectBox, ensuring data is retained across app sessions.
-Responsive UI: Modern UI with cards for task display, a floating action button for voice input, and Google Fonts for typography.
-Lottie Animations: Visual feedback during voice input with a microphone animation.
-Error Handling: User-friendly snackbar notifications for success and error states.
+**Voice Notes** is an innovative mobile application built with **Flutter** that revolutionizes task management through **voice-driven interactions**. By integrating advanced technologies such as the **Gemini API** and **ObjectBox**, it offers a seamless and intuitive experience for managing tasks through natural language.
 
-Setup Instructions
+---
 
-Clone the Repository:
-git clone https://github.com/username/voice_notes.git
+## 🧠 Core Technologies
+
+| Technology         | Purpose                                |
+|--------------------|----------------------------------------|
+| **Flutter**         | Cross-platform UI development          |
+| **GetX**            | State management and dependency injection |
+| **Gemini API**      | Natural language processing (`gemini-1.5-flash`) |
+| **ObjectBox**       | Local database for offline task storage |
+| **speech_to_text**  | Voice-to-text conversion               |
+
+---
+
+##  Key Features
+
+### 1. Voice Command Intelligence
+- **Functionality**: Create, update, and delete tasks entirely through voice.
+- **Tech Stack**: Gemini API processes natural language input.
+- **Supported Commands**:
+    - "Create a task..."
+    - "Update the task..."
+    - "Delete the task..."
+- **Parsing**: Extracts task title, description, and datetime from conversational input.
+
+### 2. Task Management Capabilities
+- **Task Attributes**:
+    - `title`
+    - `description`
+    - `datetime`
+- **Interaction Methods**:
+    - Voice commands
+    - Traditional touch UI
+
+### 3.  Data Persistence
+- **Storage**: Powered by ObjectBox
+- **Benefits**:
+    - Offline-first experience
+    - High-performance local database
+    - Data persists across app sessions
+
+### 4. User Interface
+- **Design Elements**:
+    - Responsive layout with card-based task views
+    - Floating action button (FAB) for initiating voice input
+- **Visual Enhancements**:
+    - Google Fonts for clean typography
+    - Lottie animations for real-time voice feedback
+    - Snackbar alerts for success and error notifications
+
+---
+
+## Technical Architecture
+
+### State Management (GetX)
+- **Reactive State**:
+    - Real-time UI updates via `RxList<Task>` and observables
+- **Dependency Injection**:
+    - Simplified using `Get.put()` and `Get.find()`
+- **Minimal Boilerplate**:
+    - Quick to scale and manage
+
+### Voice Processing Workflow
+1. Capture speech via `speech_to_text`
+2. Convert to text
+3. Send to Gemini API with prompt
+4. Receive structured JSON response:
+   ```json
+   {
+     "action": "create|update|delete",
+     "title": "...",
+     "description": "...",
+     "datetime": "2025-07-01T14:30:00",
+     "new_title": "...",
+     "new_description": "...",
+     "new_datetime": "..."
+   }
+   ```
+5. Parse and execute corresponding task operation
+6. Update local database
+7. Notify user with visual feedback
+
+### Error Handling
+- Snackbar alerts for feedback
+- Graceful fallbacks for invalid input or parsing failures
+
+---
+
+## Development Setup
+
+### Prerequisites
+- Flutter SDK (3.22.2)
+- Gemini API key
+
+### Installation Steps
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/SAli-haider/voice_task.git
 cd voice_notes
 
-
-Install Flutter:Ensure Flutter is installed (version 3.4.3 or higher). Follow the official Flutter installation guide.
-
-Install Dependencies:Run the following command in the project directory to install dependencies from pubspec.yaml:
+# 2. Install dependencies
 flutter pub get
 
+# 3. Generate ObjectBox bindings
+flutter pub run build_runner build
 
-Set Up ObjectBox:
+# 4. Configure Gemini API Key
+# → Open lib/main.dart and replace 'your-api-key'
 
-Generate ObjectBox bindings by running:flutter pub run build_runner build
+# 5. Add Lottie animation
+# → Place mic_lottie.json in assets/mic_lottie.json
 
-
-This generates objectbox.g.dart for the ObjectBox database.
-
-
-Add Gemini API Key:
-
-Obtain an API key from Google Cloud for Gemini API.
-Add the API key to lib/main.dart (replace 'your-api-key' in the code).
-
-
-Add Lottie Animation:
-
-Download a microphone Lottie animation from LottieFiles and place it in assets/mic_lottie.json.
-
-
-Run the App:
+# 6. Run the app
 flutter run
+```
+
+---
+
+##  Usage Scenarios
+
+###  Creating a Task
+- **Action**: Tap the mic icon
+- **Command**:  
+  `"Create a task to attend meeting on July 10 2025 at 2 PM, Descrption progress millestone"`
+
+###  Updating a Task
+- **Command**:  
+  `"Update the task attend meeting to attend conference at 10 June 2025 5 PM"`
+
+### Deleting a Task
+- **Command**:  
+  `"Delete the task attend meeting"`
+- **Alternate**: Use delete icon on the task card
+
+---
+
+
+---
+
+##  Demo & Screenshots
+
+📂 [View on Google Drive](https://drive.google.com/drive/folders/1thEnLnr0kFod10AjTKQKfTmvOzFxHY2i?usp=drive_link)
+
+---
 
 
 
-How to Use the App
+---
 
-Launch the App: Open the app on your device or emulator.
-View Tasks: The main screen displays tasks in a list of cards, showing title, description, and formatted datetime.
-Add a Task:  
-Tap the floating action button (microphone icon).
-Speak a command like: "Create a task to attend meeting and description meeting 
-extract overall flutter related journey 
-on July 10 2025 at 2 PM."
-The app processes the command via the Gemini API and adds the task to the list.
+## 📄 License
 
+This project is licensed under the MIT License.  
+See the `LICENSE` file for more information.
 
-Update a Task:  
-Speak a command like: "Update the task attend meeting to attend conference at 10 June 2025 5PM."
-The app updates the matching task based on title or datetime.
-
-
-Delete a Task:  
-Speak a command like: "Delete the task attend meeting."
-Alternatively, tap the delete icon on a task card to remove it.
-
-
-Visual Feedback:  
-A Lottie animation displays during voice input.
-A loading indicator shows while processing the voice command.
-Success or error messages appear as snackbars at the bottom of the screen.
-
-
-
-LLM Integration
-The app integrates with the Gemini API (gemini-1.5-flash model) to process voice commands:
-
-Voice Input: The speech_to_text package captures spoken commands and converts them to text.
-API Request: The text is sent to the Gemini API with a prompt requiring a JSON response in the format:{
-"action": "create|update|delete",
-"title": "task title",
-"description": "task description (optional)",
-"datetime": "ISO 8601 format (e.g., 2025-07-01T14:30:00)",
-"new_title": "new title for update (optional)",
-"new_description": "new description for update (optional)",
-"new_datetime": "new ISO 8601 datetime for update (optional)"
-}
-
-
-Response Handling: The TaskController parses the JSON response to perform the specified action (create, update, or delete tasks).
-Date Parsing: Uses the intl package to parse flexible date formats, falling back to the current time if parsing fails.
-Error Handling: Displays snackbar notifications for API errors, invalid responses, or unrecognized commands.
-
-State Management
-The app uses GetX for state management due to its simplicity, reactivity, and ease of use:
-
-Reactive State:  
-The TaskController manages a reactive list of tasks (RxList<Task>) and boolean flags (isLoading, isVoiceAtive) using Rx observables.
-The UI (TaskScreen) uses Obx to automatically rebuild when the task list or flags change.
-
-
-Why GetX?:  
-Lightweight compared to alternatives like Provider or Riverpod.
-Provides reactive state management without boilerplate code.
-Simplifies dependency injection with Get.put and navigation with Get.snackbar.
-
-
-Implementation:  
-TaskController handles task operations (add, update, delete) and voice command processing.
-Changes to tasks, isLoading, or isVoiceAtive trigger automatic UI updates.
-ObjectBox persists tasks locally, and TaskController syncs the in-memory tasks list with the database.
-
-
-
-Controller-Model-View Pattern
-
-Controller (TaskController): Manages business logic, API calls, voice processing, and state updates.
-Model (Task): Defines the data structure for tasks with fields for taskId, title, description, and dateTime, annotate for ObjectBox persistence.
-View (TaskScreen): Renders the UI using reusable widgets (CustomText) and reacts to state changes via Obx.
-
-Reusable Widgets
-
-CustomText: A reusable Text widget with customizable font size, weight, color, and alignment, styled with Google Fonts (if configured).
-Usage: Simplifies consistent text styling across the app, reducing code duplication.
-
-Screenshots
-
-Main Screen: [Insert screenshot of task list]
-Voice Input Active: [Insert screenshot of microphone animation]
-Task Created Notification: [Insert screenshot of snackbar]
-
-Demo Video
-
-[Insert link to demo video hosted on GitHub or external platform]
-
-Project Structure
-voice_notes/
-├── lib/
-│   ├── controller/
-│   │   └── task_controller.dart
-│   ├── model/
-│   │   └── task.dart
-│   ├── utils/
-│   │   ├── extension/
-│   │   │   └── date_time.dart
-│   │   ├── pallet/
-│   │   │   └── color_pallet.dart
-│   │   └── widgets/
-│   │       └── custom_text.dart
-│   ├── task_screen.dart
-│   ├── about_screen.dart
-│   └── main.dart
-├── assets/
-│   └── mic_lottie.json
-├── pubspec.yaml
-└── README.md
-
+---

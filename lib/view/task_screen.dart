@@ -46,11 +46,14 @@ class TaskScreen extends StatelessWidget {
                   subtitle: Column(
                     children: [
                       const SizedBox(height: 4),
-                      CustomText(
-                        text: task.description,
-                        fontSize: 12,
-                        textAlign: TextAlign.start,
-                        color: ColorPallet.textColor.withOpacity(0.7),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: CustomText(
+                          text: task.description,
+                          fontSize: 12,
+                          textAlign: TextAlign.start,
+                          color: ColorPallet.textColor.withOpacity(0.7),
+                        ),
                       ),
                       const SizedBox(height: 8),
                       Align(
@@ -79,7 +82,10 @@ class TaskScreen extends StatelessWidget {
         onPressed: () => controller.listenAndProcessCommand(),
         child: Obx(() {
           if (controller.isLoading.value && !controller.isVoiceAtive.value) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+                child: CircularProgressIndicator(
+              color: Colors.white,
+            ));
           } else if (controller.isVoiceAtive.value) {
             return Lottie.asset("assets/mic_lottie.json");
           } else {
