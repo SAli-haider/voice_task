@@ -20,5 +20,3 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false, home: TaskScreen());
   }
 }
-
-const apiKey = 'API_KEY';
